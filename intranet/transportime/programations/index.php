@@ -2,17 +2,24 @@
     session_start();
     date_default_timezone_set('America/Lima');
 
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    error_reporting(E_ALL);
+    $config = parse_ini_file("/var/www/hubtec-io/.env", true);
+    extract($config);
+
+    $global_db_environment = $MASTER_ENVIRONMENT;
+    $global_db_type = "mongo";
+    require $PATH_PHP . "/appConnection.php.php";
+
+    $users = $mongo->hubtec->users;
+    $options = $mongo->hubtec->options;
+    $clients = $mongo->hubtec->clients;
+    $programations = $mongo->hubtec->programations;
 
     if (!isset($_SESSION['USER_ID'])) {
-        header ('Location:../../login');
+        header ("Location:" . $PATH_INTRANET . "/login");
     }
 
-    require "../../assets/php/appConnHubtec.php";
-    require "../../assets/php/f_encryptDecrypt.php";
-    require "../assets/php/vars.php";
+    require $PATH_PHP . "/f_encryptDecrypt.php";
+    require $PATH_PHP . "/ttime_vars.php.php";
 
     if (isset($_COOKIE['refreshPeriod'])) {
         $refreshPeriod = $_COOKIE['refreshPeriod'];
@@ -105,68 +112,58 @@
                                                         <select class="form-select" id="source" name="source" required>
                                                             <option value="" selected>Seleccione origen</option>
                                                             <?php
-                                                                $stmt = $conn->prepare("
-                                                                    SELECT
-                                                                        c2880645_ttime.clients.id,
-                                                                        c2880645_ttime.clients.full_name
-                                                                    FROM
-                                                                        c2880645_ttime.clients
-                                                                    WHERE
-                                                                        c2880645_ttime.clients.environment = :environment
-                                                                    ORDER BY
-                                                                        c2880645_ttime.clients.id
-                                                                ");
+                                                                $select_clients = $clients->find(
+                                                                    ['environment' => strval($_SESSION['ENVIRONMENT'])],
+                                                                    [
+                                                                        '$sort' => [
+                                                                            'id' => 1,
+                                                                        ],
+                                                                        '$projection' => [
+                                                                            'id' => 1,
+                                                                            'full_name' => 1,
+                                                                            '_id' => 0,
+                                                                        ],
+                                                                    ],
+                                                                );
 
-                                                                $stmt->execute([
-                                                                    'environment' => $_SESSION['ENVIRONMENT'],
-                                                                ]);
+                                                                foreach ($select_clients as $client) {
+                                                                    $counter_programations = $programations->count(
+                                                                        ['$and' => [
+                                                                            ['state' => [
+                                                                                '$ne' => 0
+                                                                            ]],
+                                                                            ['source_id' => intval($client["id"])],
+                                                                            ['environment' => strval($_SESSION['ENVIRONMENT'])],
+                                                                        ]],
+                                                                    );
 
-                                                                foreach ($stmt->fetchAll() as $row) {
-                                                                    $counter_stmt = $conn->prepare("
-                                                                        SELECT
-                                                                            COUNT(c2880645_ttime.programations.id) COUNTER
-                                                                        FROM
-                                                                            c2880645_ttime.programations
-                                                                        WHERE
-                                                                            c2880645_ttime.programations.state <> 0
-                                                                            AND c2880645_ttime.programations.source_id = :source_id
-                                                                            AND c2880645_ttime.programations.environment = :environment
-                                                                    ");
+                                                                    if ($counter_programations <= 0) {
+                                                                        echo "
+                                                                            <option value='" . $client["id"] . "'>" . $client["full_name"] . "</option>
+                                                                        ";
+                                                                    }
+                                                                    else {
+                                                                        $select_programations = $programations->find(
+                                                                            ['$and' => [
+                                                                                ['state' => [
+                                                                                    '$ne' => 0
+                                                                                ]],
+                                                                                ['source_id' => intval($client["id"])],
+                                                                                ['environment' => strval($_SESSION['ENVIRONMENT'])],
+                                                                            ]],
+                                                                            [
+                                                                                'projection' => [
+                                                                                    'id' => 1,
+                                                                                    'source_id' => 1,
+                                                                                    '_id' => 0,
+                                                                                ],
+                                                                            ],
+                                                                        );
 
-                                                                    $counter_stmt->execute([
-                                                                        'source_id' => $row['id'],
-                                                                        'environment' => $_SESSION['ENVIRONMENT'],
-                                                                    ]);
-
-                                                                    foreach ($counter_stmt->fetchAll() as $row_counter) {
-                                                                        if ($row_counter["COUNTER"] <= 0) {
+                                                                        foreach ($select_programations as $programation) {
                                                                             echo "
-                                                                                <option value='" . $row["id"] . "'>" . $row["full_name"] . "</option>
+                                                                                <option value='" . $client["id"] . "'>" . $row["full_name"] . " (Programación " . $programation["id"] . ")</option>
                                                                             ";
-                                                                        }
-                                                                        else {
-                                                                            $select_stmt_source = $conn->prepare("
-                                                                                SELECT
-                                                                                    c2880645_ttime.programations.id,
-                                                                                    c2880645_ttime.programations.source_id
-                                                                                FROM
-                                                                                    c2880645_ttime.programations
-                                                                                WHERE
-                                                                                    c2880645_ttime.programations.state <> 0
-                                                                                    AND c2880645_ttime.programations.source_id = :source_id
-                                                                                    AND c2880645_ttime.programations.environment = :environment
-                                                                            ");
-
-                                                                            $select_stmt_source->execute([
-                                                                                'source_id' => $row['id'],
-                                                                                'environment' => $_SESSION['ENVIRONMENT'],
-                                                                            ]);
-
-                                                                            foreach ($select_stmt_source->fetchAll() as $row_source) {
-                                                                                echo "
-                                                                                    <option value='" . $row["id"] . "'>" . $row["full_name"] . " (Programación " . $row_source["id"] . ")</option>
-                                                                                ";
-                                                                            }
                                                                         }
                                                                     }
                                                                 }

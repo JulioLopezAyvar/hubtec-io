@@ -1,117 +1,294 @@
+<?php
+    session_start();
+    date_default_timezone_set('America/Lima');
+    $time_start = microtime(true);
+
+    $config = parse_ini_file("/var/www/hubtec-io/.env", true);
+    extract($config);
+
+    require "/var/www/resources/php/hubtec-io/vars.php";
+?>
 <!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/web-hosting.js"></script>
-  	<link rel="stylesheet" type="text/css" href="css/web-hosting.css">
-	<link href="https://images.donweb.com/favicon.ico" rel="Shortcut Icon">
-	<link href="https://images.donweb.com/favicon.gif" rel="icon" type="image/gif">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Web Hosting</title>
-</head>
-<body>
+<html lang="es">
+    <head>
+        <?php echo ($MASTER_ENVIRONMENT == "prod" ? $head_gtag : null) ?>
 
-<div class="menu-sup">
-	<div class="width_wrap">
-		<img src="img/logo-donwebbywebdotcom.png">
-		<a target="_blank" class=btn-menu href="https://donweb.com/ingresar">Acceso clientes</a>
-    </div>
-</div>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>HubTec - Innovation at the Core</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
 
-<header>
-	<div class="width_wrap">
-    <h1>Web Hosting</h1>
-	    <div class="bloque-azul">
-	    	<div class="img"><img src="img/img-box.png"></div>
-	    	<div class="texto">
-	    		<h2>¡Tu hosting ya está listo!</h2>
-	    		<p>Esta página se publicó en forma automática para indicar la correcta creación y funcionamiento de tu nueva cuenta de hosting y brindarte contenido de ayuda para que lo aproveches al máximo.
-	    		<br><strong>La misma será reemplazada por tu sitio cuando lo publiques.</strong>
-			</p>
-	    	</div>
-	    </div>
-    </div>
-</header>
+        <!-- Favicons -->
+        <link href="assets/img/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-<section class="difm">
-	<div class="width_wrap">
-		<div class="bloque-texto">
-			<div class="copete">Lo hacemos por ti</div>
-			<h2>¿Todavía no tienes página web?<br><strong>Nosotros la hacemos por tí en sólo 5 días</strong></h2>
-			<p class="bajada">Crearemos un sitio de calidad profesional adaptable a dispositivos móviles.</p>
-			<a target="_blank" class="btn-hollow" href="https://sitiosimple.com/es-ar/crear-pagina-web?utm_source=web-hosting&utm_medium=banner&utm_campaign=cs-web-hosting-difm">Más info</a>
-		</div>
-	</div>
-</section>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-<section class="asesor_box">
-	<div class="width_wrap">
-		<div class="bloque-texto">
-			<h2>¿Necesitas asesoramiento?</h2>
-			<a href="https://donweb.com#openChat" target="_blank" class="btn">Habla con un asesor</a>
-		</div>
-	</div>
-</section>
+        <!-- Vendor CSS Files -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<footer>
-<div class="telefonos">
-	<div class="width_wrap">
-		<p class="tit">Teléfonos</p>
-			<div class="lista-telefonos">
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_ar"></i>ARGENTINA</p>
-					<p class="telefono">Buenos Aires: +54 (11) 52388127</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_bo"></i>BOLIVIA</p>
-					<p class="telefono">Buenos Aires: +54 (11) 52388127</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_br"></i>BRASIL</p>
-					<p class="telefono">New York: +1 (718) 8317149</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_cl"></i>CHILE</p>
-					<p class="telefono">Santiago: +56 2 24958462</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_co"></i>COLOMBIA</p>
-					<p class="telefono">Bogotá: +57 1 5087540</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_es"></i>ESPAÑA</p>
-					<p class="telefono">New York: +1 (718) 8317149</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_us"></i>ESTADOS UNIDOS</p>
-					<p class="telefono">New York: +1 (718) 8317149</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_int"></i>INTERNACIONAL</p>
-					<p class="telefono">New York: +1 (718) 8317149</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_mx"></i>MEXICO</p>
-					<p class="telefono">D.F.: +52 55 53509210</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_pe"></i>PERU</p>
-					<p class="telefono">Lima: +51 1718 5400</p>
-				</div>
-				<div class="item">
-					<p class="nombre"><i class="common ic_flag flag_uy"></i>URUGUAY</p>
-					<p class="telefono">Buenos Aires: +54 11 52388127</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pie">
-		<div class="width_wrap">
-			<img src="img/logo-donwebbywebdotcom-white.png">
-		</div>
-	</div>
-</footer>
+        <!-- Main CSS File -->
+        <link href="assets/css/main.css" rel="stylesheet">
+    </head>
 
-</body>
+    <body class="index-page">
+        <?php echo ($MASTER_ENVIRONMENT == "prod" ? $body_gtag : null) ?>
+
+        <header id="header" class="header d-flex align-items-center sticky-top">
+            <div class="container-fluid container-xl position-relative d-flex align-items-center">
+                <a href="index.html" class="logo d-flex align-items-center me-auto">
+                    <img src="assets/img/HubTec-LogoWEB.png" alt="">
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a href="#hero" class="active">Inicio</a></li>
+                        <li><a href="#about">Nosotros</a></li>
+                        <!--
+                        <li><a href="#services">Servicios</a></li>
+                        -->
+                        <li><a href="#clientes">Clientes</a></li>
+                        <!--
+                        <li><a href="#team">Nuestro Equipo</a></li>
+                        -->
+                        <!--
+                        <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="#">Dropdown 1</a></li>
+                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Deep Dropdown 1</a></li>
+                                <li><a href="#">Deep Dropdown 2</a></li>
+                                <li><a href="#">Deep Dropdown 3</a></li>
+                                <li><a href="#">Deep Dropdown 4</a></li>
+                                <li><a href="#">Deep Dropdown 5</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="#">Dropdown 2</a></li>
+                            <li><a href="#">Dropdown 3</a></li>
+                            <li><a href="#">Dropdown 4</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="#contact">Contact</a></li>
+                        -->
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+                <a class="btn-getstarted" href="intranet/login">Extranet</a>
+            </div>
+        </header>
+
+        <main class="main">
+            <!-- Hero Section -->
+            <section id="hero" class="hero section">
+                <div class="container">
+                    <div class="row gy-4">
+                        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
+                            <h1>Tecnología estratégica, resultados reales.</h1>
+                            <p>Somos el centro de tu transformación digital</p>
+                            <div class="d-flex">
+                                <!-- <a href="#about" class="btn-get-started">Conócenos</a>  -->
+                                <!--<a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 hero-img justify-content-top" data-aos="zoom-out" data-aos-delay="100">
+                            <img src="assets/img/HubTec_LOGO.png" class="img-fluid animated" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Hero Section -->
+
+            <center>
+                <section id="carrousel" class="clientes section">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/IntraPeru.png" alt="">
+                            </div>
+                            <!--
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/EntreJuegosySonrisas.png" alt="">
+                            </div>
+                            -->
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/Fusiontel.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/OzoneMusicStore.png " alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/Shili.png " alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/Biomedist.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/Ronronnerie.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/ROchoa.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/BigNetwork.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="assets/img/clientes/DVogue.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </center>
+
+            <!-- Featured Services Section -->
+
+            <!-- /Featured Services Section -->
+
+            <!-- About Section -->
+            <section id="about" class="about section">
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <span>Nosotros<br></span>
+                    <h2>Nosotros</h2>
+                    <p>
+                        Con más de 25 años de trayectoria, ofrecemos soluciones para diferentes necesidades.<br>
+                        Somos el centro de la transformación digital que necesitas.<br><br>
+                        Nuestro servicio abarca Infraestructura Física y Lógica, Seguridad Informática, Diseño y Desarrollo Web y Móvil.
+                    </p>
+                </div>
+                <!-- End Section Title -->
+
+                <div class="container" align="center">
+                    <img src="assets/img/enConstruccion.png" height="50%" width="50%" alt="">
+                </div>
+            </section>
+            <!-- /About Section -->
+
+            <!-- Stats Section -->
+            <!-- /Stats Section -->
+
+            <!-- Services Section -->
+            <!-- /Services Section -->
+
+            <!-- Clientes -->
+            <section id="clientes" class="portfolio section">
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <span>Clientes</span>
+                    <h2>Clientes</h2>
+                    <p>Nos confiaron sus requerimientos tecnológicos </p>
+                </div>
+                <!-- End Section Title -->
+
+                <center>
+                    <section id="carrousel" class="clientes section"">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/IntraPeru.png" alt="">
+                                </div>
+                                <!--
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/EntreJuegosySonrisas.png" alt="">
+                                </div>
+                                -->
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/Fusiontel.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/OzoneMusicStore.png " alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/Shili.png " alt="">
+                                </div>
+                                    <div class="swiper-slide">
+                                    <img src="assets/img/clientes/Biomedist.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/Ronronnerie.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/ROchoa.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/BigNetwork.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/img/clientes/DVogue.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </center>
+            </section>
+            <!-- /Clientes Section -->
+
+            <!-- Testimonials Section -->
+            <!-- /Testimonials Section -->
+
+            <!-- Team Section -->
+            <!-- /Team Section -->
+
+            <!-- Contact Section -->
+            <!-- /Contact Section -->
+        </main>
+
+        <footer id="footer" class="footer">
+            <div class="container copyright text-center mt-4">
+                <p>© <?php echo date("Y"); ?><span> HubTec. Todos los derechos reservados.</span></p>
+            </div>
+        </footer>
+
+        <!-- Scroll Top -->
+        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Preloader -->
+        <div id="preloader"></div>
+
+        <!-- Vendor JS Files -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Main JS File -->
+        <script src="assets/js/main.js"></script>
+    </body>
+
+    <script source="text/Javascript">
+        var miSwiper = new Swiper('.swiper-container', {
+            touchMoveStopPropagation: false,
+            variableWidth: true,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 800,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                // when window width is >= 320px
+                320: {
+                slidesPerView: 1,
+                spaceBetween: 50
+                },
+                // when window width is >= 480px
+                480: {
+                slidesPerView: 1,
+                spaceBetween: 50
+                },
+                // when window width is >= 640px
+                640: {
+                slidesPerView: 4,
+                spaceBetween: 65
+                }
+            }
+        });
+    </script>
 </html>
