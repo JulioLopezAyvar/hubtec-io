@@ -81,7 +81,7 @@
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
-                <a class="btn-getstarted" href="intranet/login">Extranet</a>
+                <a class="btn-getstarted" href="/">Inicio</a>
             </div>
         </header>
 
