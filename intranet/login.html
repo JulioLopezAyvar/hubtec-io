@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HubTec - Innovation at the Core</title>
+
+        <!-- Favicons -->
+        <link href="/assets/img/favicon.png" rel="icon">
+        <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.13.6/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div class='container'>
+            <div style="height:10rem;">
+                <div class="h-100 d-inline-block"></div>
+            </div>
+
+            <div class="row text-center">
+                <a href="http://www-testing.hubtec.io">
+                    <div class="offset-sm-4 col-sm-4">
+                        <img src="/assets/img/hubtec-logo.webp" class="img-fluid" alt="Hubtec">
+                    </div>
+                </a>
+            </div>
+
+            <div class='row'>
+                <div class='offset-sm-4 col-sm-4'>
+                    <form role='form' method='post' name='form' id="login">
+                        <div class="form-floating my-4">
+                            <input type="email" class="form-control" id="email" name="email" autofocus required>
+                            <label for="email">Correo electrónico</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" required>
+                            <label for="password">Password</label>
+                            <div id="passwordHelp" class="form-text">Nunca compartas tus credenciales de acceso.</div>
+                        </div>
+
+                        <div role='alert' id="alert" style="display:none;"></div>
+
+                        <div class="mb-3">
+                            <a href="forget">¿Olvidaste tu clave?</a>
+                        </div>
+                        <div class="mb-3 text-end">
+                            <input class='btn btn-primary' name='button' type='submit' id="button_submit" value='Ingresar'>
+
+                            <button class="btn btn-primary" type="button" id="button_loading" style="display:none">
+                                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                <span role="status">Cargando...</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pb-5 fixed-bottom text-center">
+                <p id="copyright"></p>
+            </div>
+        </div>
+
+        <script src="/assets/js/hubtec/login.js"></script>
+        <script src="/assets/js/hubtec/homepage.js"></script>
+    </body>
+</html>

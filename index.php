@@ -1,9 +1,8 @@
 <?php
     session_start();
     date_default_timezone_set('America/Lima');
-    $time_start = microtime(true);
 
-    $config = parse_ini_file("/var/www/hubtec-io/.env", true);
+    $config = parse_ini_file("/var/www/resources/php/hubtec-io/.env", true);
     extract($config);
 
     require "/var/www/resources/php/hubtec-io/vars.php";
@@ -13,8 +12,8 @@
     <head>
         <?php echo ($MASTER_ENVIRONMENT == "prod" ? $head_gtag : null) ?>
 
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>HubTec - Innovation at the Core</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -33,9 +32,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-        <!-- Main CSS File -->
         <link href="assets/css/main.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.13.6/dist/axios.min.js"></script>
     </head>
 
     <body class="index-page">
@@ -81,18 +80,18 @@
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
-                <a class="btn-getstarted" href="/">Inicio</a>
+                <a class="btn-getstarted" href="intranet/login">Área de clientes</a>
             </div>
         </header>
 
         <main class="main">
-            <!-- Hero Section -->
+            <!-- Begin Hero Section -->
             <section id="hero" class="hero section">
                 <div class="container">
                     <div class="row gy-4">
                         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-                            <h1>Tecnología estratégica, resultados reales.</h1>
-                            <p>Somos el centro de tu transformación digital</p>
+                            <h1 id="hero_title"></h1>
+                            <p id="hero_sub_title"></p>
                             <div class="d-flex">
                                 <!-- <a href="#about" class="btn-get-started">Conócenos</a>  -->
                                 <!--<a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
@@ -104,7 +103,7 @@
                     </div>
                 </div>
             </section>
-            <!-- /Hero Section -->
+            <!-- End Hero Section -->
 
             <center>
                 <section id="carrousel" class="clientes section">
@@ -113,11 +112,9 @@
                             <div class="swiper-slide">
                                 <img src="assets/img/clientes/IntraPeru.png" alt="">
                             </div>
-                            <!--
                             <div class="swiper-slide">
                                 <img src="assets/img/clientes/EntreJuegosySonrisas.png" alt="">
                             </div>
-                            -->
                             <div class="swiper-slide">
                                 <img src="assets/img/clientes/Fusiontel.png" alt="">
                             </div>
@@ -147,21 +144,13 @@
                 </section>
             </center>
 
-            <!-- Featured Services Section -->
-
-            <!-- /Featured Services Section -->
-
-            <!-- About Section -->
+            <!-- Begin About Section -->
             <section id="about" class="about section">
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
-                    <span>Nosotros<br></span>
-                    <h2>Nosotros</h2>
-                    <p>
-                        Con más de 25 años de trayectoria, ofrecemos soluciones para diferentes necesidades.<br>
-                        Somos el centro de la transformación digital que necesitas.<br><br>
-                        Nuestro servicio abarca Infraestructura Física y Lógica, Seguridad Informática, Diseño y Desarrollo Web y Móvil.
-                    </p>
+                    <span id="about_us_title_shadow"><br></span>
+                    <h2 id="about_us_title"></h2>
+                    <p id="about_us_description"></p>
                 </div>
                 <!-- End Section Title -->
 
@@ -169,36 +158,28 @@
                     <img src="assets/img/enConstruccion.png" height="50%" width="50%" alt="">
                 </div>
             </section>
-            <!-- /About Section -->
+            <!-- End About Section -->
 
-            <!-- Stats Section -->
-            <!-- /Stats Section -->
-
-            <!-- Services Section -->
-            <!-- /Services Section -->
-
-            <!-- Clientes -->
+            <!-- Begin Clients -->
             <section id="clientes" class="portfolio section">
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
-                    <span>Clientes</span>
-                    <h2>Clientes</h2>
-                    <p>Nos confiaron sus requerimientos tecnológicos </p>
+                    <span id="clients_title_shadow"></span>
+                    <h2 id="clients_title"></h2>
+                    <p id="clients_description"></p>
                 </div>
                 <!-- End Section Title -->
 
                 <center>
-                    <section id="carrousel" class="clientes section"">
+                    <section id="carrousel" class="clientes section">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img src="assets/img/clientes/IntraPeru.png" alt="">
                                 </div>
-                                <!--
                                 <div class="swiper-slide">
                                     <img src="assets/img/clientes/EntreJuegosySonrisas.png" alt="">
                                 </div>
-                                -->
                                 <div class="swiper-slide">
                                     <img src="assets/img/clientes/Fusiontel.png" alt="">
                                 </div>
@@ -228,21 +209,12 @@
                     </section>
                 </center>
             </section>
-            <!-- /Clientes Section -->
-
-            <!-- Testimonials Section -->
-            <!-- /Testimonials Section -->
-
-            <!-- Team Section -->
-            <!-- /Team Section -->
-
-            <!-- Contact Section -->
-            <!-- /Contact Section -->
+            <!-- End Clients Section -->
         </main>
 
         <footer id="footer" class="footer">
             <div class="container copyright text-center mt-4">
-                <p>© <?php echo date("Y"); ?><span> HubTec. Todos los derechos reservados.</span></p>
+                <p id="copyright"></p>
             </div>
         </footer>
 
@@ -254,12 +226,12 @@
 
         <!-- Vendor JS Files -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <!-- Main JS File -->
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/hubtec/homepage.js"></script>
     </body>
 
     <script source="text/Javascript">

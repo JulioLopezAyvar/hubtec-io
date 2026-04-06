@@ -1,8 +1,0 @@
-RewriteEngine on
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:CDN-LOOP} !cloudflare
-RewriteCond %{REQUEST_URI} !^/.well-known/acme-challenge/
-RewriteCond %{HTTP_HOST} ^(www\.)?hubtec\.io
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,QSA]
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
