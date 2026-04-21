@@ -1,5 +1,5 @@
 <?php
-    require_once 'f_encryptDecrypt.php';
+    require_once '/var/www/resources/php/hubtec-io/f_encryptDecrypt.php';
 
     echo
     "

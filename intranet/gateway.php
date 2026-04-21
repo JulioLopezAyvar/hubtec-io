@@ -1,0 +1,55 @@
+<?php
+    date_default_timezone_set('America/Lima');
+
+    $config = parse_ini_file("/var/www/resources/php/hubtec-io/.env", true);
+    extract($config);
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HubTec - Innovation at the Core</title>
+
+        <!-- Favicons -->
+        <link href="assets/img/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.13.6/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div class='container'>
+            <div style="height:5rem;">
+                <div class="h-100 d-inline-block"></div>
+            </div>
+
+            <div class="row text-center">
+                <a href="<?php echo $MASTER_ENVIRONMENT; ?>">
+                    <div class="offset-sm-4 col-sm-4">
+                        <img src="/assets/img/hubtec-logo.webp" class="img-fluid" alt="Hubtec">
+                    </div>
+                </a>
+            </div>
+
+            <div class='row mt-5'>
+                <div class="col-sm-12 text-center">
+                    <p>Bienvenido <font id="full_name"></font></p>
+                    <p>Selecciona tu empresa</p>
+
+                    <div id="companies-list"></div>
+                </div>
+            </div>
+
+            <div class="pb-5 fixed-bottom text-center">
+                <p id="copyright"></p>
+            </div>
+        </div>
+
+        <script src="/assets/js/hubtec/profile.js"></script>
+        <script src="/assets/js/hubtec/gateway.js"></script>
+        <script src="/assets/js/hubtec/homepage.js"></script>
+    </body>
+</html>

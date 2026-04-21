@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class='container'>
-            <div style="height:5rem;">
+            <div style="height:10rem;">
                 <div class="h-100 d-inline-block"></div>
             </div>
 
@@ -36,24 +36,16 @@
 
             <div class='row'>
                 <div class='offset-sm-4 col-sm-4'>
-                    <form role='form' method='post' name='form' id="processLogin">
+                    <form role='form' method='post' name='form' id='forget'>
                         <div class="form-floating my-4">
                             <input type="email" class="form-control" id="email" name="email" autofocus required>
                             <label for="email">Correo electrónico</label>
                         </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" required>
-                            <label for="password">Password</label>
-                            <div id="passwordHelp" class="form-text">Nunca compartas tus credenciales de acceso.</div>
-                        </div>
 
                         <div role='alert' id="response" style="display:none;"></div>
 
-                        <div class="mb-3">
-                            <a href="forget">¿Olvidaste tu clave?</a>
-                        </div>
                         <div class="mb-3 text-end">
-                            <input class='btn btn-primary' name='button' type='submit' id="btn_submit" value='Ingresar'>
+                            <input class='btn btn-primary' name='button' type='submit' id="btn_submit" value='Recuperar'>
 
                             <button class="btn btn-primary" type="button" id="btn_loading" style="display:none">
                                 <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
@@ -69,7 +61,7 @@
             </div>
         </div>
 
-        <script src="/assets/js/hubtec/login.js"></script>
+        <script src="/assets/js/hubtec/forget.js"></script>
         <script src="/assets/js/hubtec/homepage.js"></script>
     </body>
 </html>

@@ -5,7 +5,7 @@ $(document).ready(function() {
         if(department) {
             $.ajax({
                 type:'POST',
-                url:'../assets/php/listUbigeos.php',
+                url:'/assets/api/public/ubigeos.php',
                 data:'department='+department,
                 success:function(html) {
                     $('#province').html(html);
@@ -21,7 +21,7 @@ $(document).ready(function() {
         if(province) {
             $.ajax({
                 type:'POST',
-                url:'../assets/php/listUbigeos.php',
+                url:'/assets/api/public/ubigeos.php',
                 data:'province='+province+'&department='+department,
                 success:function(html) {
                     $('#district').html(html);
