@@ -172,7 +172,11 @@
             $global_db_type = "redis";
             require '/var/www/resources/php/hubtec-io/appConnection.php';
 
+<<<<<<< HEAD
             $redis_user_email = $redis->get("data:user:email:" . $email);
+=======
+            $redis_user_email = $redis->get("data:email:" . $email);
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
             ##########################################################################################
             #EMAIL NOT EXIST
@@ -191,7 +195,11 @@
                     ],
                 ];
 
+<<<<<<< HEAD
                 header("HTTP/1.1 401 Unauthorized");
+=======
+                header("HTTP/1.1 400 Bad Request");
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                 echo json_encode($errors, JSON_UNESCAPED_UNICODE);
                 exit();
@@ -200,7 +208,11 @@
             #EMAIL ALREADY EXIST
             ##########################################################################################
             else {
+<<<<<<< HEAD
                 $redis_user = json_decode($redis->get("data:user:id:" . $redis_user_email), true);
+=======
+                $redis_user = json_decode($redis->get("data:user:" . $redis_user_email), true);
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                 ##########################################################################################
                 #EMAIL NOT EXIST
@@ -210,7 +222,11 @@
                         "data" => [
                             "errors" => [
                                 "key" => "authorization",
+<<<<<<< HEAD
                                 "message" => ($lang == "en" ? "Wrong email or password. <br>Try &quot;Forgot your password?&quot; option" : "El usuario o contraseña son inválidas<br>Intenta con la opción &quot;&iquest;Has olvidado tu contraseña?&quot;"),
+=======
+                                "message" => ($lang == "en" ? "Your account is incomplete<br>Try with &quot;Forgot your password?&quot;" : "Tu cuenta se encuentra restringida<br>Intenta con la opción &quot;&iquest;Has olvidado tu contraseña?&quot;"),
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
                                 "payload" => [
                                     "code" => __LINE__,
                                 ],
@@ -219,7 +235,11 @@
                         ],
                     ];
 
+<<<<<<< HEAD
                     header("HTTP/1.1 401 Unauthorized");
+=======
+                    header("HTTP/1.1 400 Bad Request");
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                     echo json_encode($errors, JSON_UNESCAPED_UNICODE);
                     exit();
@@ -245,7 +265,11 @@
                             ],
                         ];
 
+<<<<<<< HEAD
                         header("HTTP/1.1 401 Unauthorized");
+=======
+                        header("HTTP/1.1 400 Bad Request");
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                         echo json_encode($errors, JSON_UNESCAPED_UNICODE);
                         exit();
@@ -267,7 +291,11 @@
                             ],
                         ];
 
+<<<<<<< HEAD
                         header("HTTP/1.1 401 Unauthorized");
+=======
+                        header("HTTP/1.1 400 Bad Request");
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                         echo json_encode($errors, JSON_UNESCAPED_UNICODE);
                         exit();
@@ -289,7 +317,11 @@
                             ],
                         ];
 
+<<<<<<< HEAD
                         header("HTTP/1.1 401 Unauthorized");
+=======
+                        header("HTTP/1.1 400 Bad Request");
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
                         echo json_encode($errors, JSON_UNESCAPED_UNICODE);
                         exit();

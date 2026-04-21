@@ -78,7 +78,11 @@
             "data" => [],
         ];
 
+<<<<<<< HEAD
         $redis_user = json_decode($redis->get("data:user:id:" . $user_id_authenticated), true);
+=======
+        $redis_user = json_decode($redis->get("data:user:" . $user_id_authenticated), true);
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
         $companies_users = $mongo->hubtec->companies_users;
 
@@ -97,7 +101,11 @@
         );
 
         foreach ($select_companies_users as $relation) {
+<<<<<<< HEAD
             $redis_company = json_decode($redis->get("data:company:id:" . $relation["company_id"]), true);
+=======
+            $redis_company = json_decode($redis->get("data:company:" . $relation["company_id"]), true);
+>>>>>>> a592956ea12e91ec1f4b366e31764394ddbff03c
 
             switch ($relation["profile"]) {
                 case 0:
